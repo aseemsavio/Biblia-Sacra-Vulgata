@@ -1,26 +1,22 @@
 package com.aseemsavio.biblia
 
-import io.vertx.core.AbstractVerticle
-import io.vertx.core.Promise
+import com.aseemsavio.biblia.routes.BibliaRoutes
+import io.vertx.ext.web.Router
+import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
 
-class MainVerticle : AbstractVerticle() {
+class MainVerticle : CoroutineVerticle() {
 
-  override fun start(startPromise: Promise<Void>) {
-    vertx
-      .createHttpServer()
-      .requestHandler { req ->
-        req.response()
-          .putHeader("content-type", "text/plain")
-          .end("Hello from Vert.x!")
-      }
-      .listen(8888) { http ->
-        if (http.succeeded()) {
-          startPromise.complete()
-          println("HTTP server started on port 8888")
-        } else {
-          startPromise.fail(http.cause());
-        }
-      }
+  override suspend fun start() {
+
+    val router = Router.router(vertx)
+
+    BibliaRoutes().configureRoutes(router)
+
+    vertx.createHttpServer()
+      .requestHandler(router)
+      .listen(8080)
+      .await()
+
   }
 }
-
