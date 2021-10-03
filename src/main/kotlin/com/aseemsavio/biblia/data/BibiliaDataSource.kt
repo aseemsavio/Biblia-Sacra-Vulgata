@@ -1,12 +1,13 @@
 package com.aseemsavio.biblia.data
 
-
 fun List<JsonBook>.chapters(): List<Chapter> =
   this.map {
     it.chapters.map { c ->
       Chapter(
         BibleBookName(it.book),
-        c.verses.map { v -> Verse(BibleBookName(it.book), c.chapter, v.verse, v.textEn, v.textLa, v.notes) })
+        c.verses.map { v ->
+          Verse(BibleBookName(it.book), c.chapter, v.verse, v.textEn, v.textLa, v.notes)
+        })
     }
   }.flatten()
 
