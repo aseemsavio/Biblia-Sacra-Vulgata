@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin ("jvm") version "1.5.10"
   application
+  id("org.jetbrains.kotlin.plugin.serialization") version "1.5.30"
   id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
@@ -38,6 +39,10 @@ dependencies {
   implementation("io.vertx:vertx-lang-kotlin-coroutines")
   // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+
+  // Kotlin JSON serialization
+  implementation("org.jetbrains.kotlin:kotlin-serialization:1.5.30")
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
