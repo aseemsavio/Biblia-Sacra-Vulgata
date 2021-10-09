@@ -11,12 +11,12 @@ interface TestamentDatabase {
 
 interface BooksDatabase {
   fun getBookNames(testament: Testament?): BookNames
-  fun getBook(book: BibleBookName): ChaptersMap
+  fun getBook(testament: Testament, book: BibleBookName): ChaptersMap
 }
 
 interface ChaptersDatabase {
-  fun getTotalChapters(book: BibleBookName): TotalChapters
-  fun getChapter(book: BibleBookName): VersesList
+  fun getTotalChapters(testament: Testament, book: BibleBookName): TotalChapters
+  fun getChapter(testament: Testament, book: BibleBookName): VersesList
 }
 
 interface VersesDatabase {
@@ -31,10 +31,10 @@ interface VersesDatabase {
   ): VersesList?
 }
 
+typealias BookNames = Map<Testament, Set<BibleBookName>?>
 typealias VerseNumber = Int
 typealias TotalChapters = Int
 typealias TotalVerses = Int
-typealias TestamentNames = List<Testament>
+typealias TestamentNames = Set<Testament>
 
-data class BookNames(val names: List<TestamentBookNames>)
-data class TestamentBookNames(val testament: Testament, val bookNames: List<BibleBookName>)
+
