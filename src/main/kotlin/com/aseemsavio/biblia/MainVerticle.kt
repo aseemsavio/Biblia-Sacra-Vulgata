@@ -1,8 +1,6 @@
 package com.aseemsavio.biblia
 
-import com.aseemsavio.biblia.data.bible
-import com.aseemsavio.biblia.data.chapters
-import com.aseemsavio.biblia.data.verses
+import com.aseemsavio.biblia.data.theBible
 import com.aseemsavio.biblia.routes.BibliaRoutes
 import io.vertx.ext.web.Router
 import io.vertx.kotlin.coroutines.CoroutineVerticle
@@ -12,8 +10,7 @@ class MainVerticle : CoroutineVerticle() {
 
   override suspend fun start() {
     val router = Router.router(vertx)
-    val verses = bible().chapters().verses()
-    println("Verses: ${verses.size}")
+    val bible = theBible()
 
     BibliaRoutes().configureRoutes(router)
 
@@ -23,4 +20,9 @@ class MainVerticle : CoroutineVerticle() {
       .await()
 
   }
+}
+
+suspend fun main() {
+  val a = theBible()
+  println(a.size)
 }

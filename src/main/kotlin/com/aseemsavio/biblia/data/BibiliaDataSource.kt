@@ -6,7 +6,7 @@ fun List<JsonBook>.chapters(): List<Chapter> =
       Chapter(
         BibleBookName(it.book),
         c.verses.map { v ->
-          Verse(BibleBookName(it.book), c.chapter, v.verse, v.textEn, v.textLa, v.notes)
+          Verse(BibleBookName(it.book), Testament(it.testament), c.chapter, v.verse, v.textEn, v.textLa, v.notes)
         })
     }
   }.flatten()
@@ -41,6 +41,7 @@ data class Chapter(
 
 data class Verse(
   val book: BibleBookName,
+  val testament: Testament,
   val chapter: Int,
   val verse: Int,
   val textEn: String,
