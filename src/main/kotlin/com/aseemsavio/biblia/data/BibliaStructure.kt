@@ -1,5 +1,9 @@
 package com.aseemsavio.biblia.data
 
+/**
+ * This function returns contents of the Bibilia Sacra Vulgata
+ * in an efficient Map Data Structure - [BibiliaMap], most suitable for querying.
+ */
 suspend fun bibleMap(): BibiliaMap = bible().verses().toMap()
 
 /**
@@ -22,6 +26,7 @@ private fun List<JsonBook>.verses(): List<Verse> =
 
 /**
  * This function groups the list of [Verse]s into a multi-layered map in the following order:
+ *
  *  1. [Testament]
  *  2. [BibleBookName]
  *  3. [BibleChapter]
