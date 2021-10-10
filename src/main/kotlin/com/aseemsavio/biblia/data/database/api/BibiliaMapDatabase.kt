@@ -5,7 +5,11 @@ import com.aseemsavio.biblia.data.*
 /**
  * Map based Database Implementation for Bibilia Sacra Vulgata
  */
-class BibiliaMapDatabase(private val bible: BibiliaMap) : BibiliaDatabase {
+class BibiliaMapDatabase private constructor(private val bible: BibiliaMap) : BibiliaDatabase {
+
+  companion object {
+    fun initialiseMapDB(bibleMap: BibiliaMap) = BibiliaMapDatabase(bibleMap)
+  }
 
   override fun getTestamentNames(): TestamentNames = bible.keys
 
@@ -19,7 +23,6 @@ class BibiliaMapDatabase(private val bible: BibiliaMap) : BibiliaDatabase {
         Testament("NT") -> setOf(Testament("NT")).associateWith { bible[it]?.keys }
         else -> mapOf()
       }
-
 
   override fun getBook(testament: Testament, book: BibleBookName): ChaptersMap = bible[testament]?.get(book) ?: mapOf()
 
@@ -43,3 +46,5 @@ class BibiliaMapDatabase(private val bible: BibiliaMap) : BibiliaDatabase {
     to: VerseNumber
   ): VersesList? = bible[testament]?.get(book)?.get(chapter)?.filter { it.verse in from..to }
 }
+
+
