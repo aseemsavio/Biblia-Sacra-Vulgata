@@ -8,7 +8,7 @@ interface BibiliaService : TestamentService, BookService
 
 interface TestamentService {
   fun getTestamentNames(): Set<String>
-  fun getTestaments(testamentName: String?): List<JsonTestament>
+  fun getTestaments(testamentName: String?): JsonTestamentList
 }
 
 interface BookService {
@@ -16,4 +16,5 @@ interface BookService {
   fun getBook(bookName: String): JsonBook?
 }
 
+typealias JsonTestamentList = List<JsonTestament>
 typealias BookNamesList = List<BookNamesItem>

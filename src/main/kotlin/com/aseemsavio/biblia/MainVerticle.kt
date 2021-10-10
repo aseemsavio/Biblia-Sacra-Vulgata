@@ -2,7 +2,7 @@ package com.aseemsavio.biblia
 
 import com.aseemsavio.biblia.data.bibleMap
 import com.aseemsavio.biblia.data.database.api.BibiliaMapDatabase.Companion.initialiseMapDB
-import com.aseemsavio.biblia.routes.BibliaRoutes
+import com.aseemsavio.biblia.routes.BibiliaRoutes
 import io.vertx.ext.web.Router
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
@@ -13,7 +13,7 @@ class MainVerticle : CoroutineVerticle() {
     val router = Router.router(vertx)
     val database = initialiseMapDB(bibleMap())
 
-    BibliaRoutes().configureRoutes(router)
+    BibiliaRoutes().configureRoutes(router)
 
     vertx.createHttpServer()
       .requestHandler(router)

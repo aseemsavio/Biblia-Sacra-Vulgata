@@ -15,7 +15,7 @@ import kotlin.coroutines.CoroutineContext
  *
  * This is where all the route configuration should go.
  */
-class BibliaRoutes : CoroutineScope {
+class BibiliaRoutes : CoroutineScope {
 
   suspend fun configureRoutes(router: Router) {
     configureHealthCheckRoute(router)
@@ -27,7 +27,7 @@ class BibliaRoutes : CoroutineScope {
         .response()
         .putHeader("content-type", "text/plain")
         .setStatusCode(200)
-        .end("Biblia Sacra Vulgata is UP!!")
+        .end("Gloria Patri, et filio, et spiritui sancto in saecula saeculorum! Biblia Sacra Vulgata is UP!!")
     }
   }
 
