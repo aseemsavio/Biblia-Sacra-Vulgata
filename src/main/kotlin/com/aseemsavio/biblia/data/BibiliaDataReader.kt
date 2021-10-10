@@ -37,3 +37,16 @@ data class JsonBook(
   val testament: String,
   val chapters: List<JsonChapter>
 )
+
+@Serializable
+data class JsonTestament(
+  val testament: String,
+  val books: List<JsonBook>
+)
+
+@Serializable
+data class BookNamesItem(
+  val testament: String,
+  val bookNames: Set<String>
+)
+

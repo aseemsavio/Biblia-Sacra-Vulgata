@@ -21,10 +21,10 @@ class BibiliaMapDatabase private constructor(private val bible: BibiliaMap) : Bi
       when (testament) {
         Testament("OT") -> setOf(Testament("OT")).associateWith { bible[it]?.keys }
         Testament("NT") -> setOf(Testament("NT")).associateWith { bible[it]?.keys }
-        else -> mapOf()
+        else -> emptyMap()
       }
 
-  override fun getBook(testament: Testament, book: BibleBookName): ChaptersMap = bible[testament]?.get(book) ?: mapOf()
+  override fun getBook(testament: Testament, book: BibleBookName): ChaptersMap = bible[testament]?.get(book) ?: emptyMap()
 
   override fun getTotalChapters(testament: Testament, book: BibleBookName): TotalChapters =
     bible[testament]?.get(book)?.size ?: 0
