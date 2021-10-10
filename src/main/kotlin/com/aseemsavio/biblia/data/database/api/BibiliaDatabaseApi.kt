@@ -16,7 +16,7 @@ interface BooksDatabase {
 
 interface ChaptersDatabase {
   fun getTotalChapters(testament: Testament, book: BibleBookName): TotalChapters
-  fun getChapter(testament: Testament, book: BibleBookName): VersesList
+  fun getChapter(testament: Testament, book: BibleBookName, chapter: BibleChapter): VersesList
 }
 
 interface VersesDatabase {
