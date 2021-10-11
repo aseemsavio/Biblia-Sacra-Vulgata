@@ -36,5 +36,3 @@ typealias VerseNumber = Int
 typealias TotalChapters = Int
 typealias TotalVerses = Int
 typealias TestamentNames = Set<Testament>
-
-

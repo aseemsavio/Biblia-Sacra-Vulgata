@@ -49,4 +49,3 @@ data class BookNamesItem(
   val testament: String,
   val bookNames: Set<String>
 )
-
