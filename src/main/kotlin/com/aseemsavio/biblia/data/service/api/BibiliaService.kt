@@ -1,8 +1,8 @@
 package com.aseemsavio.biblia.data.service.api
 
-import com.aseemsavio.biblia.data.BookNamesItem
-import com.aseemsavio.biblia.data.JsonBook
-import com.aseemsavio.biblia.data.JsonTestament
+import com.aseemsavio.biblia.data.preparation.BookNamesItem
+import com.aseemsavio.biblia.data.preparation.JsonBook
+import com.aseemsavio.biblia.data.preparation.JsonTestament
 
 interface BibiliaService : TestamentService, BookService
 

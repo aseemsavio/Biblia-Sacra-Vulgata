@@ -1,15 +1,15 @@
 package com.aseemsavio.biblia.data.database.api
 
 import com.aseemsavio.biblia.data.*
+import com.aseemsavio.biblia.data.preparation.BibiliaMap
+import com.aseemsavio.biblia.data.preparation.BooksMap
+import com.aseemsavio.biblia.data.preparation.ChaptersMap
+import com.aseemsavio.biblia.data.preparation.VersesList
 
 /**
  * Map based Database Implementation for Bibilia Sacra Vulgata
  */
-class BibiliaMapDatabase private constructor(private val bible: BibiliaMap) : BibiliaDatabase {
-
-  companion object {
-    fun initialiseMapDB(bibleMap: BibiliaMap) = BibiliaMapDatabase(bibleMap)
-  }
+class BibiliaMapDatabase (private val bible: BibiliaMap) : BibiliaDatabase {
 
   override fun getTestamentNames(): TestamentNames = bible.keys
 
@@ -46,5 +46,3 @@ class BibiliaMapDatabase private constructor(private val bible: BibiliaMap) : Bi
     to: VerseNumber
   ): VersesList? = bible[testament]?.get(book)?.get(chapter)?.filter { it.verse in from..to }
 }
-
-

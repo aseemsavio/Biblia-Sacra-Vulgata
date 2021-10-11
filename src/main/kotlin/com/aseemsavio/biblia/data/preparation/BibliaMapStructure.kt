@@ -1,16 +1,12 @@
-package com.aseemsavio.biblia.data
+package com.aseemsavio.biblia.data.preparation
 
-/**
- * This function returns contents of the Bibilia Sacra Vulgata
- * in an efficient Map Data Structure - [BibiliaMap], most suitable for querying.
- */
-suspend fun bibleMap(): BibiliaMap = bible().verses().toMap()
+import com.aseemsavio.biblia.data.*
 
 /**
  * The main purpose of this function is to build independent [Verse] objects from multiple JSON objects.
  * This will enable storing them in an efficient data structure - [BibiliaMap], which enables for efficient querying.
  */
-private fun List<JsonBook>.verses(): List<Verse> =
+fun BibleJson.verses(): List<Verse> =
   this.map {
     it.chapters.map { c ->
       Chapter(
@@ -34,7 +30,7 @@ private fun List<JsonBook>.verses(): List<Verse> =
  * The final layer, [BibleChapter] will finally have a list of [Verse]s mimicking the original
  * organisation in the Scriptures.
  */
-private fun List<Verse>.toMap(): BibiliaMap {
+fun List<Verse>.toMap(): BibiliaMap {
   return this.groupBy { Testament(it.testament.value) }
     .mapValues { (_, testament) ->
       testament.groupBy { BibleBookName(it.book.value) }

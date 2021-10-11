@@ -1,4 +1,4 @@
-package com.aseemsavio.biblia.data
+package com.aseemsavio.biblia.data.preparation
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -7,7 +7,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.URL
 
-suspend fun bible(): List<JsonBook> = Json { ignoreUnknownKeys = true }.decodeFromString(getRawBibleJson())
+suspend fun bible(): BibleJson = Json { ignoreUnknownKeys = true }.decodeFromString(getRawBibleJson())
 
 private const val URL =
   "https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Latin-Vulgate-English-Translation-Study-Bible/bible.json"
@@ -49,3 +49,5 @@ data class BookNamesItem(
   val testament: String,
   val bookNames: Set<String>
 )
+
+typealias BibleJson = List<JsonBook>
