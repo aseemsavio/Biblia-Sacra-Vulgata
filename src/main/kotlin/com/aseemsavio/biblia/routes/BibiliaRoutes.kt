@@ -26,6 +26,8 @@ class BibiliaRoutes(
   private val service: BibiliaService
 ) : CoroutineScope {
 
+  private val PREFIX = "/api/v1"
+
   suspend fun configureRoutes(router: Router) {
     with(router) {
       `configure health check route`(this)
@@ -49,11 +51,11 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure testament routes`(router: Router) {
-    router.get("/testaments").serve { with(it) { ok { json { service.getTestamentNames() } } } }
+    router.get("$PREFIX/testaments").serve { with(it) { ok { json { service.getTestamentNames() } } } }
   }
 
   private suspend fun `configure get book names in testament route`(router: Router) {
-    router.get("/testament/:testament/books").serve {
+    router.get("$PREFIX/testament/:testament/books").serve {
       with(it) {
         val testament = pp { "testament" }
         ok { json { service.getBookNames(testament) } }
@@ -62,13 +64,13 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure get all book names route`(router: Router) {
-    router.get("/books").serve {
+    router.get("$PREFIX/books").serve {
       with(it) { ok { json { service.getBookNames() } } }
     }
   }
 
   private suspend fun `configure chapter count route`(router: Router) {
-    router.get("/testament/:testament/book/:book/chapterCount").serve {
+    router.get("$PREFIX/testament/:testament/book/:book/chapterCount").serve {
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
@@ -78,7 +80,7 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure get chapter route`(router: Router) {
-    router.get("/testament/:testament/book/:book/chapter/:chapter").serve {
+    router.get("$PREFIX/testament/:testament/book/:book/chapter/:chapter").serve {
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
@@ -89,7 +91,7 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure verse count route`(router: Router) {
-    router.get("/testament/:testament/book/:book/chapter/:chapter/verseCount").serve {
+    router.get("$PREFIX/testament/:testament/book/:book/chapter/:chapter/verseCount").serve {
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
@@ -100,7 +102,7 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure get verse route`(router: Router) {
-    router.get("/testament/:testament/book/:book/chapter/:chapter/verse/:verse").serve {
+    router.get("$PREFIX/testament/:testament/book/:book/chapter/:chapter/verse/:verse").serve {
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
@@ -112,7 +114,7 @@ class BibiliaRoutes(
   }
 
   private suspend fun `configure get verses route`(router: Router) {
-    router.get("/testament/:testament/book/:book/chapter/:chapter/verses/from/:from/to/:to").serve {
+    router.get("$PREFIX/testament/:testament/book/:book/chapter/:chapter/verses/from/:from/to/:to").serve {
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
