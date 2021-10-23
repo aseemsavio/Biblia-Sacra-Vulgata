@@ -1,7 +1,6 @@
 package com.aseemsavio.biblia.routes
 
 import com.aseemsavio.biblia.data.service.api.BibiliaService
-import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
@@ -9,7 +8,9 @@ import io.vertx.kotlin.coroutines.dispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 import kotlin.coroutines.CoroutineContext
+import kotlinx.serialization.encodeToString
 
 /**
  * @author Aseem Savio
@@ -17,13 +18,17 @@ import kotlin.coroutines.CoroutineContext
  *
  * This is where all the route configuration should go.
  */
-class BibiliaRoutes(private val service: BibiliaService) : CoroutineScope {
+class BibiliaRoutes(
+  private val service: BibiliaService,
+  private val format: Json = Json { ignoreUnknownKeys = true }
+) : CoroutineScope {
 
   suspend fun configureRoutes(router: Router) {
     with(router) {
       configureHealthCheckRoute(this)
       configureTestamentRoutes(this)
-      configureGetBookNamesRoute(this)
+      configureGetBookNamesInTestamentRoute(this)
+      configureGetAllBookNamesRoute(this)
     }
   }
 
@@ -47,9 +52,21 @@ class BibiliaRoutes(private val service: BibiliaService) : CoroutineScope {
     }
   }
 
-  private suspend fun configureGetBookNamesRoute(router: Router) {
+  private suspend fun configureGetBookNamesInTestamentRoute(router: Router) {
+    router.get("/books/testament/:testament").handle {
+      val testament = it.pathParam("testament")
+      val books = format.encodeToString(service.getBookNames(testament))
+      it.request()
+        .response()
+        .putHeader("content-type", "application/json")
+        .setStatusCode(200)
+        .end(books)
+    }
+  }
+
+  private suspend fun configureGetAllBookNamesRoute(router: Router) {
     router.get("/books").handle {
-      val books = JsonObject.mapFrom(service.getBookNames("OT")).toString()
+      val books = format.encodeToString(service.getBookNames())
       it.request()
         .response()
         .putHeader("content-type", "application/json")

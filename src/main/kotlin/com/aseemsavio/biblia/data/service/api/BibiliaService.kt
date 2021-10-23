@@ -16,7 +16,7 @@ interface TestamentService {
 }
 
 interface BookService {
-  fun getBookNames(testamentName: String?): List<BookNamesItem>
+  fun getBookNames(testamentName: String? = null): List<BookNamesItem>
   fun getBook(bookName: String): JsonBook?
 }
 

@@ -14,6 +14,7 @@ import com.aseemsavio.biblia.data.preparation.JsonVerse
 import com.aseemsavio.biblia.data.service.api.BibiliaService
 
 class BibiliaMapService(private val database: BibiliaDatabase) : BibiliaService {
+
   override fun getTestamentNames(): Set<String> = database.getTestamentNames().map { it.value }.toSet()
 
   override fun getTestaments(testamentName: String?): List<JsonTestament> {
@@ -21,11 +22,12 @@ class BibiliaMapService(private val database: BibiliaDatabase) : BibiliaService 
   }
 
   override fun getBookNames(testamentName: String?): List<BookNamesItem> {
-    val books: Map<Testament, Set<BibleBookName>?> = database.getBookNames(testamentName?.let { Testament(it) })
-    val resp: List<BookNamesItem?> = books.map { testament ->
+    fun getBooks(t: String) = database.getBookNames(Testament(t)).map { testament ->
       testament.value?.map { it.value }?.let { BookNamesItem(testament.key.value, it.toSet()) }
-    }
-    TODO("Not yet implemented")
+    }.filterNotNull()
+
+    return if (testamentName == null) getTestamentNames().map { t -> getBooks(t) }.flatten()
+    else getBooks(testamentName)
   }
 
   override fun getBook(bookName: String): JsonBook? {
