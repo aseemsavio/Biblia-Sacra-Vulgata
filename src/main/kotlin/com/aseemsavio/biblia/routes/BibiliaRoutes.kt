@@ -1,5 +1,8 @@
 package com.aseemsavio.biblia.routes
 
+import com.aseemsavio.biblia.data.BibleBookName
+import com.aseemsavio.biblia.data.BibleChapter
+import com.aseemsavio.biblia.data.Testament
 import com.aseemsavio.biblia.data.service.api.BibiliaService
 import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
@@ -20,19 +23,23 @@ import kotlinx.serialization.encodeToString
  */
 class BibiliaRoutes(
   private val service: BibiliaService,
-  private val format: Json = Json { ignoreUnknownKeys = true }
+  private val json: Json = Json {
+    encodeDefaults = false
+  } /* encodeDefaults will omit values with null from the JSON */
 ) : CoroutineScope {
 
   suspend fun configureRoutes(router: Router) {
     with(router) {
-      configureHealthCheckRoute(this)
+      `configure health check route`(this)
       configureTestamentRoutes(this)
       configureGetBookNamesInTestamentRoute(this)
       configureGetAllBookNamesRoute(this)
+      configureGetTotalChaptersRoute(this)
+      configureGetChaptersRoute(this)
     }
   }
 
-  private suspend fun configureHealthCheckRoute(router: Router) {
+  private suspend fun `configure health check route`(router: Router) {
     router.get("/").handle {
       it.request()
         .response()
@@ -55,7 +62,7 @@ class BibiliaRoutes(
   private suspend fun configureGetBookNamesInTestamentRoute(router: Router) {
     router.get("/books/testament/:testament").handle {
       val testament = it.pathParam("testament")
-      val books = format.encodeToString(service.getBookNames(testament))
+      val books = json.encodeToString(service.getBookNames(testament))
       it.request()
         .response()
         .putHeader("content-type", "application/json")
@@ -66,12 +73,37 @@ class BibiliaRoutes(
 
   private suspend fun configureGetAllBookNamesRoute(router: Router) {
     router.get("/books").handle {
-      val books = format.encodeToString(service.getBookNames())
+      val books = json.encodeToString(service.getBookNames())
       it.request()
         .response()
         .putHeader("content-type", "application/json")
         .setStatusCode(200)
         .end(books)
+    }
+  }
+
+  private suspend fun configureGetTotalChaptersRoute(router: Router) {
+    router.get("/testament/:testament/book/:book/chapterCount").handle {
+      val testament = it.pathParam("testament")
+      val book = it.pathParam("book")
+      it.request()
+        .response()
+        .putHeader("content-type", "text/plain")
+        .setStatusCode(200)
+        .end(service.getTotalChapters(Testament(testament), BibleBookName(book)).toString())
+    }
+  }
+
+  private suspend fun configureGetChaptersRoute(router: Router) {
+    router.get("/testament/:testament/book/:book/chapter/:chapter").handle {
+      val testament = it.pathParam("testament")
+      val book = it.pathParam("book")
+      val chapter = it.pathParam("chapter").toInt()
+      it.request()
+        .response()
+        .putHeader("content-type", "application/json")
+        .setStatusCode(200)
+        .end(json.encodeToString(service.getChapter(Testament(testament), BibleBookName(book), BibleChapter(chapter))))
     }
   }
 
