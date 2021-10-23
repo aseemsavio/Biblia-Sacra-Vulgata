@@ -3,7 +3,6 @@ package com.aseemsavio.biblia.data.service
 import com.aseemsavio.biblia.data.BibleBookName
 import com.aseemsavio.biblia.data.BibleChapter
 import com.aseemsavio.biblia.data.Testament
-import com.aseemsavio.biblia.data.Verse
 import com.aseemsavio.biblia.data.database.api.BibiliaDatabase
 import com.aseemsavio.biblia.data.database.api.TotalChapters
 import com.aseemsavio.biblia.data.database.api.TotalVerses
@@ -44,17 +43,16 @@ class BibiliaMapService(private val database: BibiliaDatabase) : BibiliaService 
     }
 
 
-  override fun getTotalVerses(testament: Testament, book: BibleBookName, chapter: BibleChapter): TotalVerses {
-    TODO("Not yet implemented")
-  }
+  override fun getTotalVerses(testament: Testament, book: BibleBookName, chapter: BibleChapter): TotalVerses =
+    database.getTotalVerses(testament, book, chapter)
 
   override fun getVerse(
     testament: Testament,
     book: BibleBookName,
     chapter: BibleChapter,
     verse: VerseNumber
-  ): JsonVerse? {
-    TODO("Not yet implemented")
+  ): JsonVerse? = database.getVerse(testament, book, chapter, verse)?.let {
+    JsonVerse(it.chapter, it.verse, it.textEn, it.textLa, it.notes)
   }
 
   override fun getVerses(
@@ -63,7 +61,7 @@ class BibiliaMapService(private val database: BibiliaDatabase) : BibiliaService 
     chapter: BibleChapter,
     from: VerseNumber,
     to: VerseNumber
-  ): List<JsonVerse>? {
-    TODO("Not yet implemented")
+  ): List<JsonVerse>? = database.getVerses(testament, book, chapter, from, to)?.map {
+    JsonVerse(it.chapter, it.verse, it.textEn, it.textLa, it.notes)
   }
 }

@@ -36,7 +36,7 @@ class BibiliaMapDatabase (private val bible: BibiliaMap) : BibiliaDatabase {
     bible[testament]?.get(book)?.get(chapter)?.size ?: 0
 
   override fun getVerse(testament: Testament, book: BibleBookName, chapter: BibleChapter, verse: VerseNumber): Verse? =
-    bible[testament]?.get(book)?.get(chapter)?.first { it.verse == verse }
+    bible[testament]?.get(book)?.get(chapter)?.firstOrNull { it.verse == verse }
 
   override fun getVerses(
     testament: Testament,

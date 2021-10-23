@@ -31,11 +31,14 @@ class BibiliaRoutes(
   suspend fun configureRoutes(router: Router) {
     with(router) {
       `configure health check route`(this)
-      configureTestamentRoutes(this)
-      configureGetBookNamesInTestamentRoute(this)
-      configureGetAllBookNamesRoute(this)
-      configureGetTotalChaptersRoute(this)
-      configureGetChaptersRoute(this)
+      `configure testament routes`(this)
+      `configure get book names in testament route`(this)
+      `configure get all book names route`(this)
+      `configure chapter count route`(this)
+      `configure get chapter route`(this)
+      `configure verse count route`(this)
+      `configure get verse route`(this)
+      `configure get verses route`(this)
     }
   }
 
@@ -49,7 +52,7 @@ class BibiliaRoutes(
     }
   }
 
-  private suspend fun configureTestamentRoutes(router: Router) {
+  private suspend fun `configure testament routes`(router: Router) {
     router.get("/testaments").handle {
       it.request()
         .response()
@@ -59,8 +62,8 @@ class BibiliaRoutes(
     }
   }
 
-  private suspend fun configureGetBookNamesInTestamentRoute(router: Router) {
-    router.get("/books/testament/:testament").handle {
+  private suspend fun `configure get book names in testament route`(router: Router) {
+    router.get("/testament/:testament/books").handle {
       val testament = it.pathParam("testament")
       val books = json.encodeToString(service.getBookNames(testament))
       it.request()
@@ -71,7 +74,7 @@ class BibiliaRoutes(
     }
   }
 
-  private suspend fun configureGetAllBookNamesRoute(router: Router) {
+  private suspend fun `configure get all book names route`(router: Router) {
     router.get("/books").handle {
       val books = json.encodeToString(service.getBookNames())
       it.request()
@@ -82,7 +85,7 @@ class BibiliaRoutes(
     }
   }
 
-  private suspend fun configureGetTotalChaptersRoute(router: Router) {
+  private suspend fun `configure chapter count route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapterCount").handle {
       val testament = it.pathParam("testament")
       val book = it.pathParam("book")
@@ -94,7 +97,7 @@ class BibiliaRoutes(
     }
   }
 
-  private suspend fun configureGetChaptersRoute(router: Router) {
+  private suspend fun `configure get chapter route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapter/:chapter").handle {
       val testament = it.pathParam("testament")
       val book = it.pathParam("book")
@@ -104,6 +107,67 @@ class BibiliaRoutes(
         .putHeader("content-type", "application/json")
         .setStatusCode(200)
         .end(json.encodeToString(service.getChapter(Testament(testament), BibleBookName(book), BibleChapter(chapter))))
+    }
+  }
+
+  private suspend fun `configure verse count route`(router: Router) {
+    router.get("/testament/:testament/book/:book/chapter/:chapter/verseCount").handle {
+      val testament = it.pathParam("testament")
+      val book = it.pathParam("book")
+      val chapter = it.pathParam("chapter").toInt()
+      it.request()
+        .response()
+        .putHeader("content-type", "text/plain")
+        .setStatusCode(200)
+        .end(service.getTotalVerses(Testament(testament), BibleBookName(book), BibleChapter(chapter)).toString())
+    }
+  }
+
+  private suspend fun `configure get verse route`(router: Router) {
+    router.get("/testament/:testament/book/:book/chapter/:chapter/verse/:verse").handle {
+      val testament = it.pathParam("testament")
+      val book = it.pathParam("book")
+      val chapter = it.pathParam("chapter").toInt()
+      val verse = it.pathParam("verse").toInt()
+      it.request()
+        .response()
+        .putHeader("content-type", "application/json")
+        .setStatusCode(200)
+        .end(
+          json.encodeToString(
+            service.getVerse(
+              Testament(testament),
+              BibleBookName(book),
+              BibleChapter(chapter),
+              verse
+            )
+          )
+        )
+    }
+  }
+
+  private suspend fun `configure get verses route`(router: Router) {
+    router.get("/testament/:testament/book/:book/chapter/:chapter/verses/from/:from/to/:to").handle {
+      val testament = it.pathParam("testament")
+      val book = it.pathParam("book")
+      val chapter = it.pathParam("chapter").toInt()
+      val from = it.pathParam("from").toInt()
+      val to = it.pathParam("to").toInt()
+      it.request()
+        .response()
+        .putHeader("content-type", "application/json")
+        .setStatusCode(200)
+        .end(
+          json.encodeToString(
+            service.getVerses(
+              Testament(testament),
+              BibleBookName(book),
+              BibleChapter(chapter),
+              from,
+              to
+            )
+          )
+        )
     }
   }
 
