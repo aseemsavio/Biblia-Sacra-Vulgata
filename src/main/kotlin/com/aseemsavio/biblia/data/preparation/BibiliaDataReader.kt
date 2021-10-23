@@ -21,7 +21,7 @@ data class JsonVerse(
   val verse: Int,
   val textEn: String,
   val textLa: String,
-  val notes: String?
+  val notes: String? = null
 )
 
 @Serializable

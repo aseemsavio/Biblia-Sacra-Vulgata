@@ -4,6 +4,8 @@ import com.aseemsavio.biblia.data.BibleBookName
 import com.aseemsavio.biblia.data.BibleChapter
 import com.aseemsavio.biblia.data.Testament
 import com.aseemsavio.biblia.data.service.api.BibiliaService
+import com.aseemsavio.biblia.routes.dsl.pp
+import com.aseemsavio.biblia.routes.dsl.ppAsInt
 import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
@@ -64,13 +66,15 @@ class BibiliaRoutes(
 
   private suspend fun `configure get book names in testament route`(router: Router) {
     router.get("/testament/:testament/books").handle {
-      val testament = it.pathParam("testament")
-      val books = json.encodeToString(service.getBookNames(testament))
-      it.request()
-        .response()
-        .putHeader("content-type", "application/json")
-        .setStatusCode(200)
-        .end(books)
+      with(it) {
+        val testament = pp { "testament" }
+        val books = json.encodeToString(service.getBookNames(testament))
+        request()
+          .response()
+          .putHeader("content-type", "application/json")
+          .setStatusCode(200)
+          .end(books)
+      }
     }
   }
 
@@ -87,87 +91,105 @@ class BibiliaRoutes(
 
   private suspend fun `configure chapter count route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapterCount").handle {
-      val testament = it.pathParam("testament")
-      val book = it.pathParam("book")
-      it.request()
-        .response()
-        .putHeader("content-type", "text/plain")
-        .setStatusCode(200)
-        .end(service.getTotalChapters(Testament(testament), BibleBookName(book)).toString())
+      with(it) {
+        val testament = pp { "testament" }
+        val book = pp { "book" }
+        request()
+          .response()
+          .putHeader("content-type", "text/plain")
+          .setStatusCode(200)
+          .end(service.getTotalChapters(Testament(testament), BibleBookName(book)).toString())
+      }
     }
   }
 
   private suspend fun `configure get chapter route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapter/:chapter").handle {
-      val testament = it.pathParam("testament")
-      val book = it.pathParam("book")
-      val chapter = it.pathParam("chapter").toInt()
-      it.request()
-        .response()
-        .putHeader("content-type", "application/json")
-        .setStatusCode(200)
-        .end(json.encodeToString(service.getChapter(Testament(testament), BibleBookName(book), BibleChapter(chapter))))
+      with(it) {
+        val testament = pp { "testament" }
+        val book = pp { "book" }
+        val chapter = ppAsInt { "chapter" }
+        request()
+          .response()
+          .putHeader("content-type", "application/json")
+          .setStatusCode(200)
+          .end(
+            json.encodeToString(
+              service.getChapter(
+                Testament(testament),
+                BibleBookName(book),
+                BibleChapter(chapter)
+              )
+            )
+          )
+      }
     }
   }
 
   private suspend fun `configure verse count route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapter/:chapter/verseCount").handle {
-      val testament = it.pathParam("testament")
-      val book = it.pathParam("book")
-      val chapter = it.pathParam("chapter").toInt()
-      it.request()
-        .response()
-        .putHeader("content-type", "text/plain")
-        .setStatusCode(200)
-        .end(service.getTotalVerses(Testament(testament), BibleBookName(book), BibleChapter(chapter)).toString())
+      with(it) {
+        val testament = pp { "testament" }
+        val book = pp { "book" }
+        val chapter = ppAsInt { "chapter" }
+        request()
+          .response()
+          .putHeader("content-type", "text/plain")
+          .setStatusCode(200)
+          .end(service.getTotalVerses(Testament(testament), BibleBookName(book), BibleChapter(chapter)).toString())
+      }
     }
   }
 
   private suspend fun `configure get verse route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapter/:chapter/verse/:verse").handle {
-      val testament = it.pathParam("testament")
-      val book = it.pathParam("book")
-      val chapter = it.pathParam("chapter").toInt()
-      val verse = it.pathParam("verse").toInt()
-      it.request()
-        .response()
-        .putHeader("content-type", "application/json")
-        .setStatusCode(200)
-        .end(
-          json.encodeToString(
-            service.getVerse(
-              Testament(testament),
-              BibleBookName(book),
-              BibleChapter(chapter),
-              verse
+      with(it) {
+        val testament = pp { "testament" }
+        val book = pp { "book" }
+        val chapter = ppAsInt { "chapter" }
+        val verse = ppAsInt { "verse" }
+        request()
+          .response()
+          .putHeader("content-type", "application/json")
+          .setStatusCode(200)
+          .end(
+            json.encodeToString(
+              service.getVerse(
+                Testament(testament),
+                BibleBookName(book),
+                BibleChapter(chapter),
+                verse
+              )
             )
           )
-        )
+      }
     }
   }
 
   private suspend fun `configure get verses route`(router: Router) {
     router.get("/testament/:testament/book/:book/chapter/:chapter/verses/from/:from/to/:to").handle {
-      val testament = it.pathParam("testament")
-      val book = it.pathParam("book")
-      val chapter = it.pathParam("chapter").toInt()
-      val from = it.pathParam("from").toInt()
-      val to = it.pathParam("to").toInt()
-      it.request()
-        .response()
-        .putHeader("content-type", "application/json")
-        .setStatusCode(200)
-        .end(
-          json.encodeToString(
-            service.getVerses(
-              Testament(testament),
-              BibleBookName(book),
-              BibleChapter(chapter),
-              from,
-              to
+      with(it) {
+        val testament = pp { "testament" }
+        val book = pp { "book" }
+        val chapter = ppAsInt { "chapter" }
+        val from = ppAsInt { "from" }
+        val to = ppAsInt { "to" }
+        request()
+          .response()
+          .putHeader("content-type", "application/json")
+          .setStatusCode(200)
+          .end(
+            json.encodeToString(
+              service.getVerses(
+                Testament(testament),
+                BibleBookName(book),
+                BibleChapter(chapter),
+                from,
+                to
+              )
             )
           )
-        )
+      }
     }
   }
 
