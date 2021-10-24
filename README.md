@@ -2,6 +2,8 @@
 
 Open API for the Latin Vulgate, its English Translation - Catholic Public Domain Version [CPDV] and study notes.
 
+> This application is not production-ready yet. Check out the releases tab for the first release.
+
 ### 👉🏻 Contents
 1. [API Documentation](documentation/api-docs/api-doc-v1.0.0.md)
 2. [Local Setup](#building)

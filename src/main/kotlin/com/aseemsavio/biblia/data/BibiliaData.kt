@@ -9,10 +9,6 @@ value class BibleBookName(val value: String)
 @JvmInline
 value class BibleChapter(val value: Int)
 
-data class Bible(
-  val bible: Map<Testament, Books>
-)
-
 data class Books(
   val books: Map<BibleBookName, Book>
 )
