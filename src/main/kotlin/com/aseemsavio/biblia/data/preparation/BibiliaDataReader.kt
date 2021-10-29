@@ -7,13 +7,12 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.net.URL
 
-suspend fun bible(): BibleJson = Json { ignoreUnknownKeys = true }.decodeFromString(getRawBibleJson())
+suspend fun bible(url: URL): BibleJson = Json { ignoreUnknownKeys = true }.decodeFromString(getRawBibleJson(url))
 
-private const val URL =
-  "https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Latin-Vulgate-English-Translation-Study-Bible/bible.json"
+val VULGATE_URL = URL("https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Latin-Vulgate-English-Translation-Study-Bible/bible.json")
 
-private suspend fun getRawBibleJson(): String =
-  withContext(Dispatchers.IO) { URL(URL).readText() }
+private suspend fun getRawBibleJson(url: URL): String =
+  withContext(Dispatchers.IO) { url.readText() }
 
 @Serializable
 data class JsonVerse(
@@ -48,6 +47,14 @@ data class JsonTestament(
 data class BookNamesItem(
   val testament: String,
   val bookNames: Set<String>
+)
+
+@JvmInline
+value class Version(val value: String)
+
+data class VersionInfo(
+  val version: Version,
+  val url: URL
 )
 
 typealias BibleJson = List<JsonBook>

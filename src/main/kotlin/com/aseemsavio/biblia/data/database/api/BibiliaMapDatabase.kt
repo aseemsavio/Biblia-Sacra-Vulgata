@@ -1,6 +1,7 @@
 package com.aseemsavio.biblia.data.database.api
 
 import com.aseemsavio.biblia.data.*
+import com.aseemsavio.biblia.data.database.extensions.*
 import com.aseemsavio.biblia.data.preparation.BibiliaMap
 import com.aseemsavio.biblia.data.preparation.BooksMap
 import com.aseemsavio.biblia.data.preparation.ChaptersMap
@@ -44,5 +45,5 @@ class BibiliaMapDatabase (private val bible: BibiliaMap) : BibiliaDatabase {
     chapter: BibleChapter,
     from: VerseNumber,
     to: VerseNumber
-  ): VersesList? = bible[testament]?.get(book)?.get(chapter)?.filter { it.verse in from..to }
+  ): VersesList = bible[testament]?.get(book)?.get(chapter)?.filter { it.verse in from..to } ?: emptyList()
 }
