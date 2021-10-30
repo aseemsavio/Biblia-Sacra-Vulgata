@@ -59,6 +59,11 @@ Supported attributes:
 |:------------|:---------|:---------|:----------------------------|:----------|
 | `testament` | String   | Yes      | Code Name of the testament. | NT        |
 
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
 
 Example request:
 
@@ -230,6 +235,12 @@ Supported attributes:
 | `testament` | String   | Yes      | Code Name of the Testament.  | OT        |
 | `book`      | String   | Yes      | Code Name of the Book.       | Sirach    |
 
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
+
 Example request:
 
 ```shell
@@ -261,6 +272,12 @@ Supported attributes:
 | `testament` | String   | Yes      | Code Name of the Testament. | OT        |
 | `book`      | String   | Yes      | Code Name of the Book.      | Psalms    |
 | `chapter`   | Int      | Yes      | Chapter Number.             | 116       |
+
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
 
 Example request:
 
@@ -308,6 +325,12 @@ Supported attributes:
 | `book`      | String   | Yes      | Code Name of the Book.       | Sirach    |
 | `chapter`   | Int      | Yes      | Chapter Number.              | Sirach    |
 
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
+
 Example request:
 
 ```shell
@@ -340,6 +363,12 @@ Supported attributes:
 | `book`      | String   | Yes      | Code Name of the Book.      | Psalms    |
 | `chapter`   | Int      | Yes      | Chapter Number.             | 116       |
 | `verse`     | Int      | Yes      | Verse Number.               | 2         |
+
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
 
 Example request:
 
@@ -379,6 +408,12 @@ Supported attributes:
 | `chapter`   | Int      | Yes      | Chapter Number.             | 117       |
 | `from`      | Int      | Yes      | Verse Number.               | 2         |
 | `to`        | Int      | Yes      | Verse Number.               | 8         |
+
+Supported Query Params:
+
+| Attribute   | Type     | Required | Description                 | Example   |
+|:------------|:---------|:---------|:----------------------------|:----------|
+| `version`   | String   | No       | Bible Version               | Vulgate   |
 
 Example request:
 
