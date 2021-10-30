@@ -25,6 +25,27 @@ fun RoutingContext.ok(statusCode: Int = 200, fn: RestResponseBuilder.() -> Unit)
 }
 
 /**
+ * Handles not found requests.
+ */
+fun RoutingContext.notFound(fn: RestResponseBuilder.() -> Unit) {
+  this.request().response().statusCode = 404
+  RestResponseBuilder().apply(fn).build(this)
+}
+
+/**
+ * Takes in a nullable response (This can be a nullable collection or a nullable object),
+ * a success response (eg: [ok]) and a failure response (eg: [notFound]).
+ * If the response is either null or empty, the failure function is executed.
+ * For the flip case, the success function is executed.
+ */
+fun fold(response: Any?, success: () -> Unit, failure: () -> Unit) {
+  when (response) {
+    is Collection<*> -> if (response == null || response.isEmpty()) failure() else success()
+    else -> if (response == null) failure() else success()
+  }
+}
+
+/**
  * Builds the REST response.
  */
 class RestResponseBuilder {
@@ -51,8 +72,10 @@ class RestResponseBuilder {
     if (json != null && text != null)
       throw IllegalArgumentException("Only one of the properties (json, text) is allowed to be set.")
 
-    if (json == null && text == null)
-      throw IllegalArgumentException("At least one of the properties (json, text) should be set.")
+    if (json == null && text == null) {
+      context.request().response().end()
+      return
+    }
 
     context.request().response()
       .also {
