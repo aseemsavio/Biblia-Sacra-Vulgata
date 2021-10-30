@@ -1,9 +1,7 @@
 package com.aseemsavio.biblia.routes
 
-import com.aseemsavio.biblia.data.BibleBookName
-import com.aseemsavio.biblia.data.BibleChapter
-import com.aseemsavio.biblia.data.Testament
-import com.aseemsavio.biblia.data.preparation.Version
+import com.aseemsavio.biblia.data.*
+import com.aseemsavio.biblia.data.preparation.v
 import com.aseemsavio.biblia.data.service.api.BibiliaService
 import com.aseemsavio.biblia.routes.dsl.*
 import io.vertx.ext.web.Route
@@ -26,7 +24,7 @@ class BibiliaRoutes(
 ) : CoroutineScope {
 
   private val prefix = "/api/v1"
-  private val defaultVersion = Version("Vulgate")
+  private val default = "Vulgate"
 
   suspend fun configureRoutes(router: Router) {
     with(router) {
@@ -39,21 +37,6 @@ class BibiliaRoutes(
       `verse count route`(this)
       `get verse route`(this)
       `get verses route`(this)
-      testtt(this)
-    }
-  }
-
-  private suspend fun testtt(router: Router) {
-    router.get("/test/:test").serve {
-      with(it) {
-        val test = pp { "test" }
-        var res: List<String>? = if (test == "nn") listOf("hello", "world") else null
-        fold(
-          res,
-          { ok { json { res } } },
-          { notFound { } }
-        )
-      }
     }
   }
 
@@ -67,9 +50,10 @@ class BibiliaRoutes(
   }
 
   private suspend fun `testament routes`(router: Router) {
-    val res = service.getTestamentNames(defaultVersion)
     router.get("$prefix/testaments").serve {
       with(it) {
+        val version = qp(default) { "version" }
+        val res = service.getTestamentNames(version.v)
         fold(
           res,
           { ok { json { res } } },
@@ -83,7 +67,8 @@ class BibiliaRoutes(
     router.get("$prefix/testament/:testament/books").serve {
       with(it) {
         val testament = pp { "testament" }
-        val res = service.getBookNames(defaultVersion, testament)
+        val version = qp(default) { "version" }
+        val res = service.getBookNames(version.v, testament)
         fold(
           res,
           { ok { json { res } } },
@@ -95,8 +80,9 @@ class BibiliaRoutes(
 
   private suspend fun `get all book names route`(router: Router) {
     router.get("$prefix/books").serve {
-      val res = service.getBookNames(defaultVersion)
       with(it) {
+        val version = qp(default) { "version" }
+        val res = service.getBookNames(version.v)
         fold(
           res,
           { ok { json { res } } },
@@ -111,7 +97,8 @@ class BibiliaRoutes(
       with(it) {
         val testament = pp { "testament" }
         val book = pp { "book" }
-        val res = service.getTotalChapters(defaultVersion, Testament(testament), BibleBookName(book))
+        val version = qp(default) { "version" }
+        val res = service.getTotalChapters(version.v, testament.t, book.b)
         fold(
           res,
           { ok { text { res } } },
@@ -127,7 +114,8 @@ class BibiliaRoutes(
         val testament = pp { "testament" }
         val book = pp { "book" }
         val chapter = ppAsInt { "chapter" }
-        val res = service.getChapter(defaultVersion, Testament(testament), BibleBookName(book), BibleChapter(chapter))
+        val version = qp(default) { "version" }
+        val res = service.getChapter(version.v, testament.t, book.b, chapter.c)
         fold(
           res,
           { ok { json { res } } },
@@ -143,8 +131,9 @@ class BibiliaRoutes(
         val testament = pp { "testament" }
         val book = pp { "book" }
         val chapter = ppAsInt { "chapter" }
+        val version = qp(default) { "version" }
         val res =
-          service.getTotalVerses(defaultVersion, Testament(testament), BibleBookName(book), BibleChapter(chapter))
+          service.getTotalVerses(version.v, testament.t, book.b, chapter.c)
         fold(
           res,
           { ok { text { res } } },
@@ -161,8 +150,9 @@ class BibiliaRoutes(
         val book = pp { "book" }
         val chapter = ppAsInt { "chapter" }
         val verse = ppAsInt { "verse" }
+        val version = qp(default) { "version" }
         val res =
-          service.getVerse(defaultVersion, Testament(testament), BibleBookName(book), BibleChapter(chapter), verse)
+          service.getVerse(version.v, testament.t, book.b, chapter.c, verse)
         fold(
           res,
           { ok { json { res } } },
@@ -180,8 +170,9 @@ class BibiliaRoutes(
         val chapter = ppAsInt { "chapter" }
         val from = ppAsInt { "from" }
         val to = ppAsInt { "to" }
+        val version = qp(default) { "version" }
         val res =
-          service.getVerses(defaultVersion, Testament(testament), BibleBookName(book), BibleChapter(chapter), from, to)
+          service.getVerses(version.v, testament.t, book.b, chapter.c, from, to)
         fold(
           res,
           { ok { json { res } } },

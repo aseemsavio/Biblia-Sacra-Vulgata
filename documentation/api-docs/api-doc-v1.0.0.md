@@ -4,6 +4,17 @@
 
 ## API Documentation - v1.0.0
 
+All the routes below can be accompanied by the optional query param - `version` to query
+a certain _supported_ version of the Scriptures.
+If not given, the version will be defaulted to the **Vulgate**.
+
+Example request:
+
+```shell
+curl "https://example.com/api/v1/testaments?version=Vulgate"
+```
+
+
 ## Testaments
 
 > Version 1.0.0

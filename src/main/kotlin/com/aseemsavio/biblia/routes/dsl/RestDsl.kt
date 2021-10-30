@@ -11,6 +11,12 @@ import java.lang.IllegalArgumentException
 fun RoutingContext.pp(fn: () -> String): String = pathParam(fn())
 
 /**
+ * Returns the query param as a String.
+ * If null, it returns the default value.
+ */
+fun RoutingContext.qp(default: String = "", fn: () -> String): String = queryParam(fn())?.firstOrNull() ?: default
+
+/**
  * Returns the value of a path parameter as an [Int].
  */
 fun RoutingContext.ppAsInt(fn: () -> String): Int = pathParam(fn()).toInt()
@@ -40,7 +46,8 @@ fun RoutingContext.notFound(fn: RestResponseBuilder.() -> Unit) {
  */
 fun fold(response: Any?, success: () -> Unit, failure: () -> Unit) {
   when (response) {
-    is Collection<*> -> if (response == null || response.isEmpty()) failure() else success()
+    is Int -> if (response == 0) failure() else success()
+    is Collection<*> -> if (response.isEmpty()) failure() else success()
     else -> if (response == null) failure() else success()
   }
 }

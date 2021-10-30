@@ -31,3 +31,8 @@ data class Verse(
   val textLa: String,
   val notes: String?
 )
+
+val String.t get() = Testament(this)
+val String.b get() = BibleBookName(this)
+val Int.c get() = BibleChapter(this.toInt())
+

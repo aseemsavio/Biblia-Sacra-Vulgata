@@ -58,3 +58,5 @@ data class VersionInfo(
 )
 
 typealias BibleJson = List<JsonBook>
+
+val String.v get() = Version(this)
