@@ -47,7 +47,8 @@ class BibiliaRoutes(
   private suspend fun `health check route`(router: Router) {
     router.get("/").serve {
       with(it) {
-        ok { text { "Gloria Patri, et filio, et spiritui sancto in saecula saeculorum! Biblia Sacra Vulgata is UP!!" } }
+        val res = "Gloria Patri, et filio, et spiritui sancto in saecula saeculorum! Biblia Sacra Vulgata is UP!!"
+        ok { text { res } }
       }
     }
   }

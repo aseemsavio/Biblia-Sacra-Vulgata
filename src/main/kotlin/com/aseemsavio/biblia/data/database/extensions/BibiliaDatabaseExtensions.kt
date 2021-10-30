@@ -5,7 +5,7 @@ import com.aseemsavio.biblia.data.Testament
 import com.aseemsavio.biblia.data.database.api.BibiliaDatabase
 import com.aseemsavio.biblia.data.database.api.BibiliaMapDatabase
 import com.aseemsavio.biblia.data.preparation.*
-
+import com.aseemsavio.biblia.utils.pMap
 
 typealias BookNames = Map<Testament, Set<BibleBookName>?>
 typealias VerseNumber = Int
@@ -33,7 +33,7 @@ fun BibleJson.initiateDatabase(database: Database): BibiliaDatabase {
 suspend fun initialiseDatabases(
   versions: List<VersionInfo>,
   databaseType: Database
-) = versions.associateBy({ it.version }, { bible(it.url).initiateDatabase(databaseType) })
+) = versions.pMap { it.version to bible(it.url).initiateDatabase(databaseType) }.toMap()
 
 /**
  * Gives a list of supported versions
