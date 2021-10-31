@@ -3,5 +3,6 @@ include(
   "data-preparation",
   "database",
   "core",
-  "rest"
+  "rest",
+  "domain"
 )

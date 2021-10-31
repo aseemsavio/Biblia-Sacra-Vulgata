@@ -8,5 +8,5 @@ plugins {
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
   implementation(project(":database"))
-  implementation(project(":data-preparation"))
+  implementation(project(":domain"))
 }

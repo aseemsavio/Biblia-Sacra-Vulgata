@@ -38,8 +38,3 @@ fun List<Verse>.toMap(): BibiliaMap {
     }
 }
 
-typealias BibiliaMap = TestamentMap
-typealias TestamentMap = Map<Testament, BooksMap>
-typealias BooksMap = Map<BibleBookName, ChaptersMap>
-typealias ChaptersMap = Map<BibleChapter, VersesList>
-typealias VersesList = List<Verse>

@@ -35,3 +35,10 @@ data class Verse(
 val String.t get() = Testament(this)
 val String.b get() = BibleBookName(this)
 val Int.c get() = BibleChapter(this)
+
+
+typealias BibiliaMap = TestamentMap
+typealias TestamentMap = Map<Testament, BooksMap>
+typealias BooksMap = Map<BibleBookName, ChaptersMap>
+typealias ChaptersMap = Map<BibleChapter, VersesList>
+typealias VersesList = List<Verse>
