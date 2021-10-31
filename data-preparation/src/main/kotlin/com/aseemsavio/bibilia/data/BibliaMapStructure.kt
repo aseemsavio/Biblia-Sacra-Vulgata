@@ -1,6 +1,6 @@
-package com.aseemsavio.biblia.data.preparation
+package com.aseemsavio.bibilia.data
 
-import com.aseemsavio.biblia.data.*
+import com.aseemsavio.bibilia.data.*
 
 /**
  * The main purpose of this function is to build independent [Verse] objects from multiple JSON objects.

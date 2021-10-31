@@ -1,1 +1,4 @@
 rootProject.name = "biblia-sacra-vulgata"
+include(
+  "data-preparation"
+)

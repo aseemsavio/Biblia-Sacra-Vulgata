@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.aseemsavio"
-version = "1.0.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
   mavenCentral()
@@ -29,12 +29,15 @@ application {
   mainClass.set(launcherClassName)
 }
 
-dependencies {
+/*dependencies {
+
+
   implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
   implementation("io.vertx:vertx-web-client")
   implementation("io.vertx:vertx-web")
   implementation("io.vertx:vertx-lang-kotlin")
   implementation(kotlin("stdlib-jdk8"))
+
 
   implementation("io.vertx:vertx-lang-kotlin-coroutines")
   // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
@@ -46,6 +49,12 @@ dependencies {
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
+}*/
+
+subprojects {
+  repositories {
+    mavenCentral()
+  }
 }
 
 val compileKotlin: KotlinCompile by tasks

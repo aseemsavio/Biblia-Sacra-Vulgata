@@ -1,4 +1,4 @@
-package com.aseemsavio.biblia.data.preparation
+package com.aseemsavio.bibilia.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
