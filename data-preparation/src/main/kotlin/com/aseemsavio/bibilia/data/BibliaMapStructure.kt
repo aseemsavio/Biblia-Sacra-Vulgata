@@ -1,7 +1,5 @@
 package com.aseemsavio.bibilia.data
 
-import com.aseemsavio.bibilia.data.*
-
 /**
  * The main purpose of this function is to build independent [Verse] objects from multiple JSON objects.
  * This will enable storing them in an efficient data structure - [BibiliaMap], which enables for efficient querying.

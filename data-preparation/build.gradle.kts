@@ -7,7 +7,6 @@ plugins {
 
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
-  //implementation("io.vertx:vertx-lang-kotlin-coroutines")
   // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
   // Kotlin JSON serialization

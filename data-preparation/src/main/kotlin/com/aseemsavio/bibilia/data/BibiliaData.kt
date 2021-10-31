@@ -35,4 +35,3 @@ data class Verse(
 val String.t get() = Testament(this)
 val String.b get() = BibleBookName(this)
 val Int.c get() = BibleChapter(this)
-

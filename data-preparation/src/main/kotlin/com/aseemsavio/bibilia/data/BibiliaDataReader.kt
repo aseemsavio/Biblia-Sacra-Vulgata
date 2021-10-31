@@ -1,7 +1,6 @@
 package com.aseemsavio.bibilia.data
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -60,3 +59,12 @@ data class VersionInfo(
 typealias BibleJson = List<JsonBook>
 
 val String.v get() = Version(this)
+
+/**
+ * Does map operation in parallel
+ *
+ * todo: add this in its own module in the future
+ */
+suspend fun <A, B> Iterable<A>.pMap(f: suspend (A) -> B): List<B> = coroutineScope {
+  map { async { f(it) } }.awaitAll()
+}
