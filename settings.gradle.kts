@@ -1,5 +1,6 @@
 rootProject.name = "biblia-sacra-vulgata"
 include(
   "data-preparation",
-  "database"
+  "database",
+  "core"
 )
