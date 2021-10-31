@@ -4,12 +4,6 @@ import com.aseemsavio.bibilia.data.*
 import com.aseemsavio.bibilia.database.api.BibiliaDatabase
 import com.aseemsavio.bibilia.database.api.BibiliaMapDatabase
 
-typealias BookNames = Map<Testament, Set<BibleBookName>?>
-typealias VerseNumber = Int
-typealias TotalChapters = Int
-typealias TotalVerses = Int
-typealias TestamentNames = Set<Testament>
-
 sealed class Database
 object MapDatabase : Database()
 

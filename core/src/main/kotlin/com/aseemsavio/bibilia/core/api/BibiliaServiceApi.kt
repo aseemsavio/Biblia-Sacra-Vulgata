@@ -1,9 +1,6 @@
 package com.aseemsavio.bibilia.core.api
 
 import com.aseemsavio.bibilia.data.*
-import com.aseemsavio.bibilia.database.extensions.TotalChapters
-import com.aseemsavio.bibilia.database.extensions.TotalVerses
-import com.aseemsavio.bibilia.database.extensions.VerseNumber
 
 interface BibiliaService : TestamentService, BookService, ChaptersService, VersesService
 

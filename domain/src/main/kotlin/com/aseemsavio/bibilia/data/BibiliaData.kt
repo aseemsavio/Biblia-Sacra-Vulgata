@@ -42,3 +42,9 @@ typealias TestamentMap = Map<Testament, BooksMap>
 typealias BooksMap = Map<BibleBookName, ChaptersMap>
 typealias ChaptersMap = Map<BibleChapter, VersesList>
 typealias VersesList = List<Verse>
+
+typealias BookNames = Map<Testament, Set<BibleBookName>?>
+typealias VerseNumber = Int
+typealias TotalChapters = Int
+typealias TotalVerses = Int
+typealias TestamentNames = Set<Testament>

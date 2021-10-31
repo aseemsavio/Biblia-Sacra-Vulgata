@@ -4,5 +4,6 @@ include(
   "database",
   "core",
   "rest",
-  "domain"
+  "domain",
+  "rest-entrypoint"
 )
