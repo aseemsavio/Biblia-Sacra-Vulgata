@@ -12,7 +12,6 @@ val VULGATE_URL = URL("https://raw.githubusercontent.com/aseemsavio/Latin-Vulgat
 private suspend fun getRawBibleJson(url: URL): String =
   withContext(Dispatchers.IO) { url.readText() }
 
-
 /**
  * Does map operation in parallel
  *

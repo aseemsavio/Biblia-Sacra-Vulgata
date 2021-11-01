@@ -17,7 +17,6 @@ fun BibleJson.verses(): List<Verse> =
     .map { it.verses }
     .flatten()
 
-
 /**
  * This function groups the list of [Verse]s into a multi-layered map in the following order:
  *
@@ -37,4 +36,3 @@ fun List<Verse>.toMap(): BibiliaMap {
         }
     }
 }
-
