@@ -17,6 +17,6 @@ private suspend fun getRawBibleJson(url: URL): String =
  *
  * todo: add this in its own module in the future
  */
-suspend fun <A, B> Iterable<A>.pMap(f: suspend (A) -> B): List<B> = coroutineScope {
-  map { async { f(it) } }.awaitAll()
+suspend fun <A, B> Iterable<A>.pMap(fn: suspend (A) -> B): List<B> = coroutineScope {
+  map { async { fn(it) } }.awaitAll()
 }

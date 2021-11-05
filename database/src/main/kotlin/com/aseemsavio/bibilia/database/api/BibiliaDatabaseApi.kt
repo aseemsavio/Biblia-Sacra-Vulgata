@@ -1,7 +1,6 @@
 package com.aseemsavio.bibilia.database.api
 
 import com.aseemsavio.bibilia.data.*
-import com.aseemsavio.bibilia.database.extensions.*
 
 interface BibiliaDatabase : TestamentDatabase, BooksDatabase, ChaptersDatabase, VersesDatabase
 

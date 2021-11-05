@@ -46,7 +46,7 @@ fun RoutingContext.notFound(fn: RestResponseBuilder.() -> Unit) {
  */
 fun fold(response: Any?, success: () -> Unit, failure: () -> Unit) {
   when (response) {
-    is Int -> if (response == 0) failure() else success()
+    is Int -> if (response == 0) failure() else success() /* This is specific to this app only */
     is Collection<*> -> if (response.isEmpty()) failure() else success()
     else -> if (response == null) failure() else success()
   }

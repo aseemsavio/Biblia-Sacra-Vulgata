@@ -19,7 +19,7 @@ fun BibleJson.initiateDatabase(database: Database): BibiliaDatabase {
 }
 
 /**
- * Initialises all the databases.
+ * Initialises all the versions' databases.
  */
 suspend fun initialiseDatabases(
   versions: List<VersionInfo>,
