@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.aseemsavio"
-version = "1.0.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
   mavenCentral()
@@ -19,7 +19,7 @@ repositories {
 val vertxVersion = "4.1.4"
 val junitJupiterVersion = "5.7.0"
 
-val mainVerticleName = "com.aseemsavio.biblia.MainVerticle"
+val mainVerticleName = "com.aseemsavio.bibilia.server.MainVerticle"
 val launcherClassName = "io.vertx.core.Launcher"
 
 val watchForChange = "src/**/*"
@@ -30,11 +30,24 @@ application {
 }
 
 dependencies {
+  /* Vert.x */
+  implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
+  implementation("io.vertx:vertx-web-client")
+  implementation("io.vertx:vertx-web")
+  implementation("io.vertx:vertx-lang-kotlin")
+
+  implementation(project(":server"))
+}
+
+/*dependencies {
+
+
   implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
   implementation("io.vertx:vertx-web-client")
   implementation("io.vertx:vertx-web")
   implementation("io.vertx:vertx-lang-kotlin")
   implementation(kotlin("stdlib-jdk8"))
+
 
   implementation("io.vertx:vertx-lang-kotlin-coroutines")
   // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
@@ -46,6 +59,12 @@ dependencies {
 
   testImplementation("io.vertx:vertx-junit5")
   testImplementation("org.junit.jupiter:junit-jupiter:$junitJupiterVersion")
+}*/
+
+subprojects {
+  repositories {
+    mavenCentral()
+  }
 }
 
 val compileKotlin: KotlinCompile by tasks
