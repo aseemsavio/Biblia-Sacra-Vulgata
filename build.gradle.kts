@@ -35,6 +35,8 @@ dependencies {
   implementation("io.vertx:vertx-web-client")
   implementation("io.vertx:vertx-web")
   implementation("io.vertx:vertx-lang-kotlin")
+
+  implementation(project(":server"))
 }
 
 /*dependencies {

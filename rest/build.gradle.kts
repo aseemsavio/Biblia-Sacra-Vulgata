@@ -3,6 +3,7 @@ tasks.register("prepareKotlinBuildScriptModel") {}
 plugins {
   kotlin("jvm")
   application
+  id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 val vertxVersion = "4.1.4"
