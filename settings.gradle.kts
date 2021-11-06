@@ -5,5 +5,6 @@ include(
   "core",
   "rest",
   "domain",
-  "rest-entrypoint"
+  "rest-entrypoint",
+  "server"
 )

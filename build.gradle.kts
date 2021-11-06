@@ -19,7 +19,7 @@ repositories {
 val vertxVersion = "4.1.4"
 val junitJupiterVersion = "5.7.0"
 
-val mainVerticleName = "com.aseemsavio.biblia.MainVerticle"
+val mainVerticleName = "com.aseemsavio.bibilia.server.MainVerticle"
 val launcherClassName = "io.vertx.core.Launcher"
 
 val watchForChange = "src/**/*"
@@ -27,6 +27,14 @@ val doOnChange = "${projectDir}/gradlew classes"
 
 application {
   mainClass.set(launcherClassName)
+}
+
+dependencies {
+  /* Vert.x */
+  implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
+  implementation("io.vertx:vertx-web-client")
+  implementation("io.vertx:vertx-web")
+  implementation("io.vertx:vertx-lang-kotlin")
 }
 
 /*dependencies {
