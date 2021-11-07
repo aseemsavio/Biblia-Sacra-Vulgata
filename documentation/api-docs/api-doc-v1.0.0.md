@@ -239,12 +239,12 @@ Supported Query Params:
 
 | Attribute   | Type     | Required | Description                 | Example   |
 |:------------|:---------|:---------|:----------------------------|:----------|
-| `version`   | String   | No       | Bible Version               | Vulgate   |
+| `version`   | String   | No       | Bible Version               | CPDV      |
 
 Example request:
 
 ```shell
-curl "https://example.com/api/v1/testament/OT/book/Sirach/chapterCount"
+curl "https://example.com/api/v1/testament/OT/book/Sirach/chapterCount?version=CPDV"
 ```
 
 Example response:
@@ -277,12 +277,12 @@ Supported Query Params:
 
 | Attribute   | Type     | Required | Description                 | Example   |
 |:------------|:---------|:---------|:----------------------------|:----------|
-| `version`   | String   | No       | Bible Version               | Vulgate   |
+| `version`   | String   | No       | Bible Version               | CPDV      |
 
 Example request:
 
 ```shell
-curl "https://example.com/api/v1/testament/OT/book/Psalms/chapter/116"
+curl "https://example.com/api/v1/testament/OT/book/Psalms/chapter/116?version=CPDV"
 ```
 
 Example response:
@@ -292,14 +292,12 @@ Example response:
   {
     "chapter": 116,
     "verse": 1,
-    "textEn": "Alleluia. All nations, praise the Lord. All peoples, praise him.",
-    "textLa": "Alleluia. Laudate Dominum omnes Gentes: laudate eum omnes populi:"
+    "text": "Alleluia. All nations, praise the Lord. All peoples, praise him."
   },
   {
     "chapter": 116,
     "verse": 2,
-    "textEn": "For his mercy has been confirmed over us. And the truth of the Lord remains for all eternity.",
-    "textLa": "Quoniam confirmata est super nos misericordia eius: et veritas Domini manet in æternum."
+    "text": "For his mercy has been confirmed over us. And the truth of the Lord remains for all eternity."
   }
 ]
 ```
@@ -382,8 +380,7 @@ Example response:
 {
   "chapter": 116,
   "verse": 2,
-  "textEn": "For his mercy has been confirmed over us. And the truth of the Lord remains for all eternity.",
-  "textLa": "Quoniam confirmata est super nos misericordia eius: et veritas Domini manet in æternum."
+  "text": "Quoniam confirmata est super nos misericordia eius: et veritas Domini manet in æternum."
 }
 ```
 
@@ -413,12 +410,12 @@ Supported Query Params:
 
 | Attribute   | Type     | Required | Description                 | Example   |
 |:------------|:---------|:---------|:----------------------------|:----------|
-| `version`   | String   | No       | Bible Version               | Vulgate   |
+| `version`   | String   | No       | Bible Version               | CPDV      |
 
 Example request:
 
 ```shell
-curl "https://example.com/api/v1/testament/OT/book/Psalms/chapter/117/verses/from/2/to/8"
+curl "https://example.com/api/v1/testament/OT/book/Psalms/chapter/117/verses/from/2/to/8?version=CPDV"
 ```
 
 Example response:
@@ -428,44 +425,37 @@ Example response:
   {
     "chapter": 117,
     "verse": 2,
-    "textEn": "Let Israel now say: For he is good, for his mercy is forever.",
-    "textLa": "Dicat nunc Israel quoniam bonus: quoniam in sæculum misericordia eius."
+    "text": "Let Israel now say: For he is good, for his mercy is forever."
   },
   {
     "chapter": 117,
     "verse": 3,
-    "textEn": "Let the house of Aaron now say: For his mercy is forever.",
-    "textLa": "Dicat nunc domus Aaron: quoniam in sæculum misericordia eius."
+    "text": "Let the house of Aaron now say: For his mercy is forever."
   },
   {
     "chapter": 117,
     "verse": 4,
-    "textEn": "Let those who fear the Lord now say: For his mercy is forever.",
-    "textLa": "Dicant nunc qui timent Dominum: quoniam in sæculum misericordia eius."
+    "text": "Let those who fear the Lord now say: For his mercy is forever."
   },
   {
     "chapter": 117,
     "verse": 5,
-    "textEn": "In my tribulation, I called upon the Lord. And the Lord heeded me with generosity.",
-    "textLa": "De tribulatione invocavi Dominum: et exaudivit me in latitudine Dominus."
+    "text": "In my tribulation, I called upon the Lord. And the Lord heeded me with generosity."
   },
   {
     "chapter": 117,
     "verse": 6,
-    "textEn": "The Lord is my helper. I will not fear what man can do to me.",
-    "textLa": "Dominus mihi adiutor: non timebo quid faciat mihi homo."
+    "text": "The Lord is my helper. I will not fear what man can do to me."
   },
   {
     "chapter": 117,
     "verse": 7,
-    "textEn": "The Lord is my helper. And I will look down upon my enemies.",
-    "textLa": "Dominus mihi adiutor: et ego despiciam inimicos meos."
+    "text": "The Lord is my helper. And I will look down upon my enemies."
   },
   {
     "chapter": 117,
     "verse": 8,
-    "textEn": "It is good to trust in the Lord, rather than to trust in man.",
-    "textLa": "Bonum est confidere in Domino, quam confidere in homine:"
+    "text": "It is good to trust in the Lord, rather than to trust in man."
   }
 ]
 ```
