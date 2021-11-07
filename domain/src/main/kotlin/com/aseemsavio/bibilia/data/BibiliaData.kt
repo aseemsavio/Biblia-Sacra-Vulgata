@@ -27,8 +27,7 @@ data class Verse(
   val testament: Testament,
   val chapter: Int,
   val verse: Int,
-  val textEn: String,
-  val textLa: String,
+  val text: String,
   val notes: String?
 )
 

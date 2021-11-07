@@ -35,7 +35,7 @@ class BibiliaMapService(private val databases: BibiliaDatabases) : BibiliaServic
     chapter: BibleChapter
   ): List<JsonVerse> =
     databases[version]?.getChapter(testament, book, chapter)?.map {
-      JsonVerse(it.chapter, it.verse, it.textEn, it.textLa, it.notes)
+      JsonVerse(it.chapter, it.verse, it.text, it.notes)
     } ?: emptyList()
 
 
@@ -54,7 +54,7 @@ class BibiliaMapService(private val databases: BibiliaDatabases) : BibiliaServic
     chapter: BibleChapter,
     verse: VerseNumber
   ): JsonVerse? = databases[version]?.getVerse(testament, book, chapter, verse)?.let {
-    JsonVerse(it.chapter, it.verse, it.textEn, it.textLa, it.notes)
+    JsonVerse(it.chapter, it.verse, it.text, it.notes)
   }
 
   override fun getVerses(
@@ -65,6 +65,6 @@ class BibiliaMapService(private val databases: BibiliaDatabases) : BibiliaServic
     from: VerseNumber,
     to: VerseNumber
   ): List<JsonVerse> = databases[version]?.getVerses(testament, book, chapter, from, to)?.map {
-    JsonVerse(it.chapter, it.verse, it.textEn, it.textLa, it.notes)
+    JsonVerse(it.chapter, it.verse, it.text, it.notes)
   } ?: emptyList()
 }

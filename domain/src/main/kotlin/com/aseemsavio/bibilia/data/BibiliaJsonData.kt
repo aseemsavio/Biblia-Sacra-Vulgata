@@ -7,8 +7,7 @@ import java.net.URL
 data class JsonVerse(
   val chapter: Int,
   val verse: Int,
-  val textEn: String,
-  val textLa: String,
+  val text: String,
   val notes: String? = null
 )
 

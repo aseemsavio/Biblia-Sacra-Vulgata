@@ -7,7 +7,8 @@ import java.net.URL
 
 suspend fun bible(url: URL): BibleJson = Json { ignoreUnknownKeys = true }.decodeFromString(getRawBibleJson(url))
 
-val VULGATE_URL = URL("https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Latin-Vulgate-English-Translation-Study-Bible/bible.json")
+val VULGATE_URL = URL("https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Bibles/vulgate.json")
+val CPDV_URL = URL("https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Bibles/cpdv.json")
 
 private suspend fun getRawBibleJson(url: URL): String =
   withContext(Dispatchers.IO) { url.readText() }
