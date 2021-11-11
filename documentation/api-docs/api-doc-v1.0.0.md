@@ -6,14 +6,17 @@
 
 All the routes below can be accompanied by the optional query param - `version` to query
 a certain _supported_ version of the Scriptures.
-If not given, the version will be defaulted to the **Vulgate**.
+If not given, the version will be defaulted to the **Vulgate**. 
 
-Example request:
+Example:
 
 ```shell
 curl "https://example.com/api/v1/testaments?version=Vulgate"
 ```
+The open source version of this application supports two versions namely, Vulgate and CPDV (Catholic Public Domain Version).
 
+> Be informed that the CPDV or the Vulgate cannot be utilised in the Sacred Liturgy
+due to a slightly deviant numbering system in certain books.
 
 ## Testaments
 
