@@ -25,4 +25,5 @@ dependencies {
   implementation(project(":core"))
   implementation(project(":rest-entrypoint"))
   implementation(project(":data-preparation"))
+  implementation(project(":utils:config"))
 }
