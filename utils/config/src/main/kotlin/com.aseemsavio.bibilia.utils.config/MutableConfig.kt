@@ -27,6 +27,18 @@ private suspend fun bibiliaJsonConfig(
     retriever.getConfig {
         if (it.succeeded()) {
             val result: JsonObject = it.result()
+            with(result) {
+                val port = valueAsInt { "port" }
+                val developers = array { "developers" }.stringList()
+
+                val versions = array { "versions" }.stringList { "version" }
+                val links = array { "versions" }.stringList { "link" }
+
+                println("port: $port")
+                println("dev: $developers")
+                println("versions: $versions")
+                println("links: $links")
+            }
             println("Result: ${result.encodePrettily()}")
         } else throw Exception("Could not load config from $file.")
     }

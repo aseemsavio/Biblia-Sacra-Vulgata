@@ -3,5 +3,15 @@
   "developers": [
     "Aseem Savio",
     "Arya Stark"
+  ],
+  "versions": [
+    {
+      "version": "Vulgate",
+      "link": "link1"
+    },
+    {
+      "version": "CPDV",
+      "link": "link2"
+    }
   ]
 }
