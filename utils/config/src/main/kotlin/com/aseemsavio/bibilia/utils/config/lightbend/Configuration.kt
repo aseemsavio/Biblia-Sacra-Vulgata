@@ -10,18 +10,16 @@ import com.typesafe.config.ConfigFactory
  */
 private suspend fun loadConfig() = ConfigFactory.load()
 
-suspend fun config(): ConfigData {
-    val config = loadConfig()
-    with(config) {
-        val port = int { "port" }
-        val developers = strings { "developers" }
-        val database = string { "database" }
-        val versions = list { "versions" }.map {
+suspend fun config(): ConfigData = with(loadConfig()) {
+    ConfigData(
+        port = int { "port" },
+        developers = strings { "developers" },
+        database = string { "database" },
+        versionInfo = list { "versions" }.map {
             ConfigVersionData(
                 it.string { "version" },
                 it.string { "link" }
             )
         }
-        return ConfigData(port, developers, database, versions)
-    }
+    )
 }
