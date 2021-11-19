@@ -18,6 +18,10 @@ class MainVerticle : CoroutineVerticle() {
         val databases = initialiseDatabases(versions(), MapDatabase)
         val service = BibiliaMapService(databases)
         BibiliaRoutes(service).configureRoutes(router)
+        start(router)
+    }
+
+    private suspend fun start(router: Router?) {
         vertx.createHttpServer()
             .requestHandler(router)
             .listen(8080)

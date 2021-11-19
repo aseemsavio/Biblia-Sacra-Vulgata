@@ -10,7 +10,6 @@ import java.lang.Exception
 suspend fun config(vertx: Vertx) {
     val mutableConfig = MutableConfig()
     bibiliaJsonConfig(ConfigRetrieverOptions(), ConfigStoreOptions(), "file", "app.json", vertx, mutableConfig)
-
 }
 
 private suspend fun bibiliaJsonConfig(
@@ -28,7 +27,7 @@ private suspend fun bibiliaJsonConfig(
         if (it.succeeded()) {
             val result: JsonObject = it.result()
             with(result) {
-                val port = valueAsInt { "port" }
+                val port = int { "port" }
                 val developers = array { "developers" }.stringList()
 
                 val versions = array { "versions" }.stringList { "version" }

@@ -1,0 +1,17 @@
+{
+  "port": 8080,
+  "developers": [
+    "Aseem Savio",
+    "Arya Stark"
+  ],
+  "versions": [
+    {
+      "version": "Vulgate",
+      "link": "https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Bibles/vulgate.json"
+    },
+    {
+      "version": "CPDV",
+      "link": "https://raw.githubusercontent.com/aseemsavio/Latin-Vulgate-English-Translation-JSON/master/Generated-JSON/Bibles/cpdv.json"
+    }
+  ]
+}
