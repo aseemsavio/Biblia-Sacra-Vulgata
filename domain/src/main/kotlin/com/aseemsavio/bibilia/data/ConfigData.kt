@@ -1,13 +1,13 @@
 package com.aseemsavio.bibilia.data
 
-data class Config(
+data class ConfigData(
     val port: Int,
     val developers: List<String>,
-    val versionInfo: List<ConfigVersion>
+    val database: String,
+    val versionInfo: List<ConfigVersionData>
 )
 
-data class ConfigVersion(
+data class ConfigVersionData(
     val name: String,
-    val link: String?,
-    val fileLocation: String?
+    val link: String,
 )

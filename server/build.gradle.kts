@@ -23,6 +23,7 @@ dependencies {
 
   implementation(project(":database"))
   implementation(project(":core"))
+  implementation(project(":domain"))
   implementation(project(":rest-entrypoint"))
   implementation(project(":data-preparation"))
   implementation(project(":utils:config"))

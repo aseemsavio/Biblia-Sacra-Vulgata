@@ -1,9 +1,9 @@
 {
   "port": 8080,
   "developers": [
-    "Aseem Savio",
-    "Arya Stark"
+    "Aseem Savio"
   ],
+  "database": "Map",
   "versions": [
     {
       "version": "Vulgate",

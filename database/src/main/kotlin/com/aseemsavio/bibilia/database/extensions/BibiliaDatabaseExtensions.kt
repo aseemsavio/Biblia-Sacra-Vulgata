@@ -3,6 +3,7 @@ package com.aseemsavio.bibilia.database.extensions
 import com.aseemsavio.bibilia.data.*
 import com.aseemsavio.bibilia.database.api.BibiliaDatabase
 import com.aseemsavio.bibilia.database.api.BibiliaMapDatabase
+import java.net.URL
 
 sealed class Database
 object MapDatabase : Database()
@@ -29,9 +30,8 @@ suspend fun initialiseDatabases(
 /**
  * Gives a list of supported versions
  */
-fun versions(): List<VersionInfo> = listOf(
-    VersionInfo(Version("Vulgate"), VULGATE_URL),
-    VersionInfo(Version("CPDV"), CPDV_URL)
-)
+fun versions(configData: ConfigData): List<VersionInfo> = configData.versionInfo.map {
+    VersionInfo(Version(it.name), URL(it.link))
+}
 
 typealias BibiliaDatabases = Map<Version, BibiliaDatabase>
