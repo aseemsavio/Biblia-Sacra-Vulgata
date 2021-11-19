@@ -8,7 +8,7 @@ import com.typesafe.config.Config
 fun Config.int(fn: () -> String): Int = getInt(fn())
 
 /**
- * Gives the [Int] value of a config property
+ * Gives the [String] value of a config property
  */
 fun Config.string(fn: () -> String): String = getString(fn())
 

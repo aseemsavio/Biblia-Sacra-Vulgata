@@ -3,6 +3,8 @@ package com.aseemsavio.bibilia.database.extensions
 import com.aseemsavio.bibilia.data.*
 import com.aseemsavio.bibilia.database.api.BibiliaDatabase
 import com.aseemsavio.bibilia.database.api.BibiliaMapDatabase
+import java.lang.Exception
+import java.lang.IllegalArgumentException
 import java.net.URL
 
 sealed class Database
@@ -35,3 +37,12 @@ fun versions(configData: ConfigData): List<VersionInfo> = configData.versionInfo
 }
 
 typealias BibiliaDatabases = Map<Version, BibiliaDatabase>
+
+/**
+ * Getting a [Database] type from a [String].
+ * New databases when added need to be added here.
+ */
+val String.db get() = when(this) {
+    "Map" -> MapDatabase
+    else -> throw IllegalArgumentException("Unknown database type requested!")
+}
