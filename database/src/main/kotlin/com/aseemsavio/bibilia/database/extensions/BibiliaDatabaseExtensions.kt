@@ -2,13 +2,12 @@ package com.aseemsavio.bibilia.database.extensions
 
 import com.aseemsavio.bibilia.data.*
 import com.aseemsavio.bibilia.database.api.BibiliaDatabase
-import com.aseemsavio.bibilia.database.api.BibiliaMapDatabase
-import java.lang.Exception
+import com.aseemsavio.bibilia.database.api.BibiliaInMemoryDatabase
 import java.lang.IllegalArgumentException
 import java.net.URL
 
 sealed class Database
-object MapDatabase : Database()
+object InMemoryDatabase : Database()
 
 /**
  * Data will always be brought in as a [BibleJson] object.
@@ -17,7 +16,7 @@ object MapDatabase : Database()
  */
 fun BibleJson.initiateDatabase(database: Database): BibiliaDatabase {
     return when (database) {
-        is MapDatabase -> BibiliaMapDatabase(this.verses().toMap())
+        is InMemoryDatabase -> BibiliaInMemoryDatabase(this.verses().toMap())
     }
 }
 
@@ -43,6 +42,6 @@ typealias BibiliaDatabases = Map<Version, BibiliaDatabase>
  * New databases when added need to be added here.
  */
 val String.db get() = when(this) {
-    "Map" -> MapDatabase
+    "InMemory" -> InMemoryDatabase
     else -> throw IllegalArgumentException("Unknown database type requested!")
 }

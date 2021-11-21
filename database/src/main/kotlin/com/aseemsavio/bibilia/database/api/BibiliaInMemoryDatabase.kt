@@ -5,7 +5,7 @@ import com.aseemsavio.bibilia.data.*
 /**
  * Map based Database Implementation for Bibilia Sacra Vulgata
  */
-class BibiliaMapDatabase (private val bible: BibiliaMap) : BibiliaDatabase {
+class BibiliaInMemoryDatabase (private val bible: BibiliaMap) : BibiliaDatabase {
 
   override fun getTestamentNames(): TestamentNames = bible.keys
 

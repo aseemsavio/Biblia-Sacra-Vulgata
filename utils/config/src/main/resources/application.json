@@ -3,7 +3,7 @@
   "developers": [
     "Aseem Savio"
   ],
-  "database": "Map",
+  "database": "InMemory",
   "versions": [
     {
       "version": "Vulgate",
